@@ -1,0 +1,6 @@
+<?php
+require __DIR__.'/includes/bootstrap.php'; $user=require_role(['admin']); $title='Manage users';
+$rows=query('SELECT id,name,email,role FROM users ORDER BY id DESC')->get_result()->fetch_all(MYSQLI_ASSOC); require __DIR__.'/includes/header.php';
+?>
+<div class="page-heading"><span class="eyebrow">ADMINISTRATION</span><h1>People of Everyday<span>.</span></h1><p class="muted">Manage shopper and vendor accounts.</p></div><section class="panel table-wrap"><table><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Actions</th></tr></thead><tbody><?php foreach($rows as $row): ?><tr><td><?= e($row['name']) ?><?= $row['id']===$user['id']?' (you)':'' ?></td><td><?= e($row['email']) ?></td><td><span class="badge"><?= e($row['role']) ?></span></td><td><div class="table-actions"><a class="button secondary small" href="edit_user.php?id=<?= $row['id'] ?>">Edit</a><?php if($row['role']!=='admin'): ?><form method="post" action="delete_user.php" data-confirm="Delete this account? Their products will remain in the store."><?= csrf() ?><input type="hidden" name="id" value="<?= $row['id'] ?>"><button class="text-button danger">Delete</button></form><?php endif; ?></div></td></tr><?php endforeach; ?></tbody></table></section>
+<?php require __DIR__.'/includes/footer.php'; ?>
