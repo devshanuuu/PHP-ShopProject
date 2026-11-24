@@ -1,0 +1,1 @@
+</main><footer class="footer"><a class="brand" href="dashboard.php">everyday<span class="brand-dot">/</span></a><p>A little less ordinary. A little more you.</p><span>PHP + MySQL · Portfolio project</span></footer></body></html>
